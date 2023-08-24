@@ -1,7 +1,7 @@
-import dotTypes from '../../constants/dotTypes.js';
-import { DotType, GetNeighbor, RotateFigureArgsCanvas, BasicFigureDrawArgsCanvas, DrawArgsCanvas } from '../../types';
+import dotTypes from '../../constants/dotTypes.ts';
+import { DotType, GetNeighbor, RotateFigureArgsCanvas, BasicFigureDrawArgsCanvas, DrawArgsCanvas } from '../../types/index.ts';
 
-import type { CanvasRenderingContext2D } from 'skia-canvas';
+import type { CanvasRenderingContext2D } from 'https://deno.land/x/canvas@v1.4.1/mod.ts';
 
 export default class QRDot {
   _context: CanvasRenderingContext2D;
@@ -59,7 +59,7 @@ export default class QRDot {
     this._rotateFigure({
       ...args,
       draw: () => {
-        context.arc(0, 0, size / 2, 0, Math.PI * 2);
+        context.arc(0, 0, size / 2, 0, Math.PI * 2,);
       }
     });
   }
@@ -82,7 +82,7 @@ export default class QRDot {
     this._rotateFigure({
       ...args,
       draw: () => {
-        context.arc(0, 0, size / 2, -Math.PI / 2, Math.PI / 2);
+        context.arc(0, 0, size / 2, -Math.PI / 2, Math.PI / 2,);
         context.lineTo(-size / 2, size / 2);
         context.lineTo(-size / 2, -size / 2);
         context.lineTo(0, -size / 2);
@@ -97,7 +97,7 @@ export default class QRDot {
     this._rotateFigure({
       ...args,
       draw: () => {
-        context.arc(0, 0, size / 2, -Math.PI / 2, 0);
+        context.arc(0, 0, size / 2, -Math.PI / 2, 0,);
         context.lineTo(size / 2, size / 2);
         context.lineTo(-size / 2, size / 2);
         context.lineTo(-size / 2, -size / 2);
@@ -113,7 +113,7 @@ export default class QRDot {
     this._rotateFigure({
       ...args,
       draw: () => {
-        context.arc(-size / 2, size / 2, size, -Math.PI / 2, 0);
+        context.arc(-size / 2, size / 2, size, -Math.PI / 2, 0,);
         context.lineTo(-size / 2, size / 2);
         context.lineTo(-size / 2, -size / 2);
       }
@@ -126,10 +126,10 @@ export default class QRDot {
     this._rotateFigure({
       ...args,
       draw: () => {
-        context.arc(0, 0, size / 2, -Math.PI / 2, 0);
+        context.arc(0, 0, size / 2, -Math.PI / 2, 0,);
         context.lineTo(size / 2, size / 2);
         context.lineTo(0, size / 2);
-        context.arc(0, 0, size / 2, Math.PI / 2, Math.PI);
+        context.arc(0, 0, size / 2, Math.PI / 2, Math.PI,);
         context.lineTo(-size / 2, -size / 2);
         context.lineTo(0, -size / 2);
       }
@@ -142,8 +142,8 @@ export default class QRDot {
     this._rotateFigure({
       ...args,
       draw: () => {
-        context.arc(-size / 2, size / 2, size, -Math.PI / 2, 0);
-        context.arc(size / 2, -size / 2, size, Math.PI / 2, Math.PI);
+        context.arc(-size / 2, size / 2, size, -Math.PI / 2, 0,);
+        context.arc(size / 2, -size / 2, size, Math.PI / 2, Math.PI,);
       }
     });
   }

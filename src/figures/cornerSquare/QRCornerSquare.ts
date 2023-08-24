@@ -1,7 +1,7 @@
-import cornerSquareTypes from '../../constants/cornerSquareTypes.js';
-import { CornerSquareType, RotateFigureArgsCanvas, BasicFigureDrawArgsCanvas, DrawArgsCanvas } from '../../types';
+import cornerSquareTypes from '../../constants/cornerSquareTypes.ts';
+import { CornerSquareType, RotateFigureArgsCanvas, BasicFigureDrawArgsCanvas, DrawArgsCanvas } from '../../types/index.ts';
 
-import { CanvasRenderingContext2D } from 'skia-canvas';
+import { CanvasRenderingContext2D } from 'https://deno.land/x/canvas@v1.4.1/mod.ts';
 
 export default class QRCornerSquare {
   _context: CanvasRenderingContext2D;
@@ -52,7 +52,7 @@ export default class QRCornerSquare {
       ...args,
       draw: () => {
         context.arc(0, 0, size / 2, 0, Math.PI * 2);
-        context.arc(0, 0, size / 2 - dotSize, 0, Math.PI * 2);
+        context.arc(0, 0, size / 2 - dotSize, 0, Math.PI * 2,);
       }
     });
   }
@@ -77,22 +77,22 @@ export default class QRCornerSquare {
     this._rotateFigure({
       ...args,
       draw: () => {
-        context.arc(-dotSize, -dotSize, 2.5 * dotSize, Math.PI, -Math.PI / 2);
+        context.arc(-dotSize, -dotSize, 2.5 * dotSize, Math.PI, -Math.PI / 2, );
         context.lineTo(dotSize, -3.5 * dotSize);
-        context.arc(dotSize, -dotSize, 2.5 * dotSize, -Math.PI / 2, 0);
+        context.arc(dotSize, -dotSize, 2.5 * dotSize, -Math.PI / 2, 0, );
         context.lineTo(3.5 * dotSize, -dotSize);
-        context.arc(dotSize, dotSize, 2.5 * dotSize, 0, Math.PI / 2);
+        context.arc(dotSize, dotSize, 2.5 * dotSize, 0, Math.PI / 2, );
         context.lineTo(-dotSize, 3.5 * dotSize);
-        context.arc(-dotSize, dotSize, 2.5 * dotSize, Math.PI / 2, Math.PI);
+        context.arc(-dotSize, dotSize, 2.5 * dotSize, Math.PI / 2, Math.PI, );
         context.lineTo(-3.5 * dotSize, -dotSize);
 
-        context.arc(-dotSize, -dotSize, 1.5 * dotSize, Math.PI, -Math.PI / 2);
+        context.arc(-dotSize, -dotSize, 1.5 * dotSize, Math.PI, -Math.PI / 2, );
         context.lineTo(dotSize, -2.5 * dotSize);
-        context.arc(dotSize, -dotSize, 1.5 * dotSize, -Math.PI / 2, 0);
+        context.arc(dotSize, -dotSize, 1.5 * dotSize, -Math.PI / 2, 0, );
         context.lineTo(2.5 * dotSize, -dotSize);
-        context.arc(dotSize, dotSize, 1.5 * dotSize, 0, Math.PI / 2);
+        context.arc(dotSize, dotSize, 1.5 * dotSize, 0, Math.PI / 2, );
         context.lineTo(-dotSize, 2.5 * dotSize);
-        context.arc(-dotSize, dotSize, 1.5 * dotSize, Math.PI / 2, Math.PI);
+        context.arc(-dotSize, dotSize, 1.5 * dotSize, Math.PI / 2, Math.PI, );
         context.lineTo(-2.5 * dotSize, -dotSize);
       }
     });

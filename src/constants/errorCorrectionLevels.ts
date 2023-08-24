@@ -1,4 +1,4 @@
-import { ErrorCorrectionLevel } from '../types';
+import { ErrorCorrectionLevel } from '../types/index.ts';
 
 interface ErrorCorrectionLevels {
   [key: string]: ErrorCorrectionLevel;

@@ -1,18 +1,19 @@
-import calculateImageSize from '../tools/calculateImageSize.js';
-import errorCorrectionPercents from '../constants/errorCorrectionPercents.js';
-import QRDot from '../figures/dot/QRDot.js';
-import QRCornerSquare from '../figures/cornerSquare/QRCornerSquare.js';
-import QRCornerDot from '../figures/cornerDot/QRCornerDot.js';
-import defaultOptions, { RequiredOptions } from './QROptions.js';
-import gradientTypes from '../constants/gradientTypes.js';
-import { QRCode, Gradient, FilterFunction, Options } from '../types';
-import getMode from '../tools/getMode.js';
-import { Canvas, CanvasRenderingContext2D, ExportFormat, RenderOptions, loadImage, Image } from 'skia-canvas';
-import qrcode from 'qrcode-generator';
-import { promises as fs } from 'fs';
-import mergeDeep from '../tools/merge.js';
-import sanitizeOptions from '../tools/sanitizeOptions.js';
-
+import calculateImageSize from '../tools/calculateImageSize.ts';
+import errorCorrectionPercents from '../constants/errorCorrectionPercents.ts';
+import QRDot from '../figures/dot/QRDot.ts';
+import QRCornerSquare from '../figures/cornerSquare/QRCornerSquare.ts';
+import QRCornerDot from '../figures/cornerDot/QRCornerDot.ts';
+import defaultOptions, { RequiredOptions } from './QROptions.ts';
+import gradientTypes from '../constants/gradientTypes.ts';
+import { QRCode, Gradient, FilterFunction, Options } from '../types/index.ts';
+import getMode from '../tools/getMode.ts';
+import { createCanvas, EmulatedCanvas2D, CanvasRenderingContext2D, loadImage, Image } from "https://deno.land/x/canvas@v1.4.1/mod.ts";
+import qrcode from 'npm:qrcode-generator';
+import mergeDeep from '../tools/merge.ts';
+import sanitizeOptions from '../tools/sanitizeOptions.ts';
+import {Buffer} from "node:buffer";
+type ExportFormat = any;
+type RenderOptions = any;
 const squareMask = [
   [1, 1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 0, 1],
@@ -37,7 +38,7 @@ export default class QRCanvas {
   private _options: RequiredOptions;
   private _qr: QRCode;
   private _image?: Image;
-  private _canvas: Canvas;
+  private _canvas: EmulatedCanvas2D;
   private _width: number;
   private _height: number;
 
@@ -49,7 +50,7 @@ export default class QRCanvas {
 
     this._width = mergedOptions.width;
     this._height = mergedOptions.height;
-    this._canvas = new Canvas(this._width, this._height);
+    this._canvas = createCanvas(this._width, this._height);
 
     this._options = mergedOptions;
 
@@ -107,8 +108,8 @@ export default class QRCanvas {
       const maxHiddenDots = Math.floor(coverLevel * count * count);
 
       drawImageSize = calculateImageSize({
-        originalWidth: this._image.width,
-        originalHeight: this._image.height,
+        originalWidth: this._image!.width(),
+        originalHeight: this._image!.height(),
         maxHiddenDots,
         maxHiddenAxisDots: count - 14,
         dotSize
@@ -470,9 +471,9 @@ export default class QRCanvas {
    * @param format Supported types: "png" | "jpg" | "jpeg" | "pdf" | "svg"
    * @param options export options see https://github.com/samizdatco/skia-canvas#tobufferformat-page-matte-density-quality-outline
    */
-  async toBuffer(format: ExportFormat = 'png', options?: RenderOptions): Promise<Buffer> {
+  async toBuffer(format: ExportFormat = 'png', options?: RenderOptions): Promise<Uint8Array> {
     await this.created;
-    return this._canvas.toBuffer(format, options);
+    return this._canvas.toBuffer(format);
   }
 
   /**
@@ -494,8 +495,8 @@ export default class QRCanvas {
    * @param options export options see https://github.com/samizdatco/skia-canvas#tobufferformat-page-matte-density-quality-outline
    * @returns a promise that resolves once the file was written to disk
    */
-  async toFile(filePath: string, format: ExportFormat = 'png', options?: RenderOptions): Promise<void> {
+  async toFile(filePath: string, format: ExportFormat = 'png'): Promise<void> {
     await this.created;
-    return fs.writeFile(filePath, await this._canvas.toBuffer(format, options));
+    return Deno.writeFileSync(filePath, this._canvas.toBuffer(format));
   }
 }

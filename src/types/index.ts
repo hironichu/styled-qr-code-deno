@@ -1,4 +1,4 @@
-import type { CanvasRenderingContext2D, Image } from 'skia-canvas';
+import type { CanvasRenderingContext2D, Image } from 'https://deno.land/x/canvas@v1.4.1/mod.ts';
 
 export interface UnknownObject {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -100,7 +100,7 @@ export type Options = {
   height?: number;
   margin?: number;
   data?: string;
-  image?: string | Buffer | Image;
+  image?: string | Uint8Array | Image;
   qrOptions?: {
     typeNumber?: TypeNumber;
     mode?: Mode;

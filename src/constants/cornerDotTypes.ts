@@ -1,4 +1,4 @@
-import { CornerDotTypes } from '../types';
+import { CornerDotTypes } from '../types/index.ts';
 
 export default {
   dot: 'dot',
