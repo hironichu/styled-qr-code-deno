@@ -2,7 +2,7 @@
 
 JavaScript library for generating QR codes with a logo and styling.
 
-**This is a NodeJS fork of the QR code styling repo [qr-code-styling](https://github.com/kozakdenys/qr-code-styling),
+**This is a Deno fork of the QR code styling repo [qr-code-styling](https://github.com/kozakdenys/qr-code-styling),
 supporting NodeJs as well as svg exports. If you are looking for browser support head to the original project**
 
 Try it here https://qr-code-styling.com
@@ -18,11 +18,6 @@ together.
 <img style="display:inline-block" src="https://raw.githubusercontent.com/kozakdenys/qr-code-styling/master/src/assets/telegram_example_new.png" width="240" />
 </p>
 
-### Installation
-
-```
-npm install @loskir/styled-qr-code-node
-```
 
 ### Usage
 
